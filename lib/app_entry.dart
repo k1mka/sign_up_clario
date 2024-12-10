@@ -13,7 +13,7 @@ class AppEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Film Zone',
+      title: 'Clario',
       routerConfig: goRouter,
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -21,7 +21,7 @@ class AppEntry extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      theme: ThemeData(scaffoldBackgroundColor: Palette.black),
+      theme: ThemeData(scaffoldBackgroundColor: Palette.white),
       builder: (context, router) => AppRouterHolder(
         router: getRouter,
         child: CompositeLoggerHolder(

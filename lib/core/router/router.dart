@@ -13,14 +13,10 @@ final GoRouter goRouter = GoRouter(
       path: SignUpScreen.routeName,
       builder: (__, _) => const SignUpScreen(),
       routes: [
-        /*   GoRoute(
-          name: FilmInfoScreen.routeName,
-          path: '${FilmInfoScreen.routeName}/:${FilmInfoScreen.param}',
-          builder: (__, state) {
-            final filmJson = state.pathParameters[FilmInfoScreen.param]!;
-            final filmModel = FilmModel.fromJson(jsonDecode(filmJson));
-            return FilmInfoScreen(filmModel: filmModel);
-          },
+      /*  GoRoute(
+          name: SignUpScreen.routeName,
+          path: SignUpScreen.routeName,
+          builder: (__, _) => const SignUpScreen(),
         ),*/
       ],
     ),

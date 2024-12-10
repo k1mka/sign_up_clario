@@ -1,11 +1,10 @@
 {
-  "hello_world": "Hello World",
-  "film_info_screen": "Film Info Screen",
-  "film_catalog_screen": "Film Catalog Screen",
-  "search": "Search...",
-  "film_catalog": "Film Catalog",
-  "show_less": "Show less",
-  "show_more": "Show more",
-  "to_start_searching": "To start the search, you need to enter at least two characters.",
-  "data_not_found_please_check_your_request_or_try_searching_for_something_else": "Data not found. Please check your request or try searching for something else."
+  "sign_up": "Sign up",
+  "email_field_cant_be_empty": "Email field can't be empty",
+  "invalid_email_address": "Invalid email address",
+  "create_password": "Create your password",
+  "password_hint": "8 characters or more (no spaces)\nUppercase and lowercase letters\nAt least one digit",
+  "password_field_cant_be_empty": "Password field can't be empty",
+  "invalid_password": "Invalid password",
+  "re_enter_your_password": "Passwords do not match"
 }
