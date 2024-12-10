@@ -1,7 +1,4 @@
-import 'package:clario/core/theme/palette.dart';
-import 'package:clario/gen/fonts.gen.dart';
 import 'package:clario/presentation/widgets/tokens/form_validators.dart';
-import 'package:clario/presentation/widgets/tokens/spacings.dart';
 import 'package:flutter/material.dart';
 
 enum FieldState {
@@ -57,7 +54,6 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
   Widget build(BuildContext context) {
     final isError = _fieldState == FieldState.error;
     final isSuccess = _fieldState == FieldState.success;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

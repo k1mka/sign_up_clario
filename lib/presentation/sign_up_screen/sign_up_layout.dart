@@ -46,9 +46,6 @@ class _SignUpLayoutState extends State<SignUpLayout> {
                       hintText: 'Email',
                       validator: FormValidators.emailValidator,
                       controller: _emailController,
-                      onChanged: (value) {
-
-                      },
                     ),
                     const SizedBox(height: 20),
                     GradientButton(
