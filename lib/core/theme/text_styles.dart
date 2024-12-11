@@ -16,4 +16,11 @@ abstract class TextStyles {
         fontFamily: FontFamily.inter,
         fontWeight: FontWeight.w400,
       );
+
+  static TextStyle get descriptionStyle => const TextStyle(
+        fontSize: 13.0,
+        fontFamily: FontFamily.inter,
+        fontWeight: FontWeight.w400,
+        color: Palette.white,
+      );
 }

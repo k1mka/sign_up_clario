@@ -4,7 +4,9 @@
   "email_field_cant_be_empty": "Email field can't be empty",
   "invalid_email_address": "Invalid email address",
   "create_your_password": "Create your password",
-  "password_hint": "8 characters or more (no spaces)\nUppercase and lowercase letters\nAt least one digit",
+  "eight_characters": "8 characters or more (no spaces)",
+  "at_least_one_digit" : "At least one digit",
+  "uppercase_and_lowercase_letters" : "Uppercase and lowercase letters",
   "password_field_cant_be_empty": "Password field can't be empty",
   "invalid_password": "Invalid password",
   "re_enter_your_password": "Passwords do not match"

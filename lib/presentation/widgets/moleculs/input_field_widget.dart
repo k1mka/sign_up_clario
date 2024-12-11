@@ -1,6 +1,7 @@
 import 'package:clario/core/theme/palette.dart';
 import 'package:clario/core/theme/text_styles.dart';
 import 'package:clario/gen/assets.gen.dart';
+import 'package:clario/presentation/widgets/atoms/validation_widget.dart';
 import 'package:clario/presentation/widgets/tokens/spacings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -17,16 +18,16 @@ class InputFieldWidget extends HookWidget {
     required this.fieldType,
     required this.hintText,
     required this.fieldState,
+    required this.controller,
     this.errorMessage,
-    this.controller,
     this.node,
   });
 
   factory InputFieldWidget.email({
     required String hintText,
     required FieldState fieldState,
+    required TextEditingController controller,
     String? errorMessage,
-    TextEditingController? controller,
     FocusNode? node,
   }) {
     return InputFieldWidget._(
@@ -42,8 +43,8 @@ class InputFieldWidget extends HookWidget {
   factory InputFieldWidget.password({
     required String hintText,
     required FieldState fieldState,
+    required TextEditingController controller,
     String? errorMessage,
-    TextEditingController? controller,
     FocusNode? node,
   }) {
     return InputFieldWidget._(
@@ -61,7 +62,7 @@ class InputFieldWidget extends HookWidget {
   final FieldType fieldType;
   final String? errorMessage;
   final FocusNode? node;
-  final TextEditingController? controller;
+  final TextEditingController controller;
 
   static const _filled = true;
   static const _fieldHeight = 48.0;
@@ -73,6 +74,8 @@ class InputFieldWidget extends HookWidget {
   static const _contentPadding = EdgeInsets.symmetric(vertical: 14, horizontal: 20);
 
   bool get isPasswordField => fieldType == FieldType.password;
+
+  bool get isEmailField => fieldType == FieldType.email;
 
   @override
   Widget build(BuildContext context) {
@@ -148,14 +151,22 @@ class InputFieldWidget extends HookWidget {
             ),
           ),
         ),
-        /*  if (isError && errorMessage != null)
+        if (isPasswordField)
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: EdgeInsets.only(top: 8, left: 20),
+            child: RequirementListWidget(
+              controller: controller,
+              fieldState: fieldState,
+            ),
+          ),
+        if (isEmailField && isError && errorMessage != null)
+          Padding(
+            padding: EdgeInsets.only(top: 8, left: 20),
             child: Text(
               errorMessage!,
-              style: const TextStyle(color: Colors.red, fontSize: 12.0),
+              style: TextStyles.descriptionStyle.copyWith(color: Palette.errorColor),
             ),
-          ),*/
+          ),
       ],
     );
   }
