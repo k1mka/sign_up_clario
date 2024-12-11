@@ -1,7 +1,7 @@
 import 'package:clario/core/theme/palette.dart';
 import 'package:clario/core/theme/text_styles.dart';
 import 'package:clario/gen/assets.gen.dart';
-import 'package:clario/presentation/widgets/atoms/validation_widget.dart';
+import 'package:clario/presentation/widgets/moleculs/error_helper_widget.dart';
 import 'package:clario/presentation/widgets/tokens/spacings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -151,22 +151,13 @@ class InputFieldWidget extends HookWidget {
             ),
           ),
         ),
-        if (isPasswordField)
-          Padding(
-            padding: EdgeInsets.only(top: 8, left: 20),
-            child: RequirementListWidget(
-              controller: controller,
-              fieldState: fieldState,
-            ),
-          ),
-        if (isEmailField && isError && errorMessage != null)
-          Padding(
-            padding: EdgeInsets.only(top: 8, left: 20),
-            child: Text(
-              errorMessage!,
-              style: TextStyles.descriptionStyle.copyWith(color: Palette.errorColor),
-            ),
-          ),
+        ErrorHelperWidget(
+          errorMessage: errorMessage,
+          isPasswordField: isPasswordField,
+          controller: controller,
+          fieldState: fieldState,
+          isEmailField: isEmailField,
+        ),
       ],
     );
   }

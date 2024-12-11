@@ -13,6 +13,7 @@ class Spacings {
   static const xxxxL = 40.0;
   static const xxxxxL = 56.0;
   static const xxxxxxL = 64.0;
+  static const xxxxxxXL = 70.0;
 
   // SPACERS
   static const spacer2 = SizedBox.square(dimension: xxxS);
@@ -38,6 +39,8 @@ class Spacings {
   static const spacer56 = SizedBox.square(dimension: xxxxxL);
 
   static const spacer64 = SizedBox.square(dimension: xxxxxxL);
+
+  static const spacer70 = SizedBox.square(dimension: xxxxxxXL);
 
   // BORDERS
   static const borderRadius8 = BorderRadius.all(Radius.circular(S));

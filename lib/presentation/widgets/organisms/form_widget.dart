@@ -58,7 +58,7 @@ class FormWidget extends HookWidget {
 
     return Column(
       children: [
-        Spacings.spacer64,
+        Spacings.spacer70,
         Text(
           context.s.sign_up,
           style: TextStyles.signUpTextStyle,

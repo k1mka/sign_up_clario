@@ -24,6 +24,8 @@ class RequirementListWidget extends StatelessWidget {
   final FieldState fieldState;
   final TextEditingController controller;
 
+  static const _padding = EdgeInsets.only(bottom: 4);
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<TextEditingValue>(
@@ -38,9 +40,12 @@ class RequirementListWidget extends StatelessWidget {
               FieldState.success => Colors.green,
               FieldState.initial => Palette.lightBlack,
             };
-            return Text(
-              requirement.text,
-              style: TextStyles.descriptionStyle.copyWith(color: textColor),
+            return Padding(
+              padding: _padding,
+              child: Text(
+                requirement.text,
+                style: TextStyles.descriptionStyle.copyWith(color: textColor),
+              ),
             );
           }).toList(),
         );
