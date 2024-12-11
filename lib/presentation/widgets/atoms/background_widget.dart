@@ -19,7 +19,7 @@ class BackgroundWidget extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child,
+          SafeArea(child: child),
         ],
       );
 }

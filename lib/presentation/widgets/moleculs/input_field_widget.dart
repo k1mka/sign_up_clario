@@ -97,7 +97,7 @@ class InputFieldWidget extends HookWidget {
       FieldState.initial => Colors.transparent,
     };
 
-    final focusBorderColor = switch (fieldState) {
+    final decorationColor = switch (fieldState) {
       FieldState.error => Palette.errorColor,
       FieldState.success => Palette.lightGreen,
       FieldState.initial => Palette.initBorderColor,
@@ -131,7 +131,7 @@ class InputFieldWidget extends HookWidget {
                         padding: _customIconPadding,
                         child: SvgPicture.asset(
                           suffixAsset,
-                          colorFilter: ColorFilter.mode(stateColor, BlendMode.srcIn),
+                          colorFilter: ColorFilter.mode(decorationColor, BlendMode.srcIn),
                         ),
                       )
                     : _emptyPlug,
@@ -143,7 +143,7 @@ class InputFieldWidget extends HookWidget {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: Spacings.borderRadius10,
-                borderSide: BorderSide(color: focusBorderColor, width: _defaultBorder),
+                borderSide: BorderSide(color: decorationColor, width: _defaultBorder),
               ),
             ),
           ),

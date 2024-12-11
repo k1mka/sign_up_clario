@@ -1,4 +1,5 @@
 import 'package:clario/core/templates/context_extensions.dart';
+import 'package:clario/core/theme/text_styles.dart';
 import 'package:clario/gen/assets.gen.dart';
 import 'package:clario/presentation/widgets/atoms/background_widget.dart';
 import 'package:clario/presentation/widgets/atoms/gradient_button.dart';
@@ -16,31 +17,45 @@ class SignUpLayout extends HookWidget {
     // Controllers and focus nodes
     final emailController = useTextEditingController();
     final passController = useTextEditingController();
+
     final emailFocusNode = useFocusNode();
     final passFocusNode = useFocusNode();
 
     // State management for field validation
     final emailErrorMessage = useState<String?>(null);
-    final emailFieldState = useState<FieldState>(FieldState.initial);
     final passErrorMessage = useState<String?>(null);
+
+    final emailFieldState = useState<FieldState>(FieldState.initial);
     final passFieldState = useState<FieldState>(FieldState.initial);
 
-    // Validation functions
-    void validateEmail() {
-      final result = FormValidators.emailValidator(context, emailController.text);
-      emailFieldState.value = result.state;
-      emailErrorMessage.value = result.errorMessage;
+    void validateField({
+      required String value,
+      required FieldValidationFunction validator,
+      required ValueNotifier<FieldState> fieldStateNotifier,
+      required ValueNotifier<String?> errorMessageNotifier,
+      required BuildContext context,
+    }) {
+      final result = validator(context, value);
+      fieldStateNotifier.value = result.state;
+      errorMessageNotifier.value = result.errorMessage;
     }
 
-    void validatePassword() {
-      final result = FormValidators.passwordValidator(context, passController.text);
-      passFieldState.value = result.state;
-      passErrorMessage.value = result.errorMessage;
-    }
+    void validateAll(BuildContext context) {
+      validateField(
+        value: emailController.text,
+        validator: FormValidators.emailValidator,
+        fieldStateNotifier: emailFieldState,
+        errorMessageNotifier: emailErrorMessage,
+        context: context,
+      );
 
-    void validateAll() {
-      validateEmail();
-      validatePassword();
+      validateField(
+        value: passController.text,
+        validator: FormValidators.passwordValidator,
+        fieldStateNotifier: passFieldState,
+        errorMessageNotifier: passErrorMessage,
+        context: context,
+      );
     }
 
     return Scaffold(
@@ -50,10 +65,15 @@ class SignUpLayout extends HookWidget {
           child: Padding(
             padding: Spacings.paddingH30,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Spacings.spacer64,
+                Text(
+                  context.s.sign_up,
+                  style: TextStyles.signUpTextStyle,
+                ),
+                Spacings.spacer40,
                 InputFieldWidget.email(
-                  hintText: 'Email',
+                  hintText: context.s.email,
                   node: emailFocusNode,
                   controller: emailController,
                   fieldState: emailFieldState.value,
@@ -61,7 +81,7 @@ class SignUpLayout extends HookWidget {
                 ),
                 Spacings.spacer20,
                 InputFieldWidget.password(
-                  hintText: 'Create your password',
+                  hintText: context.s.create_password,
                   node: passFocusNode,
                   controller: passController,
                   fieldState: passFieldState.value,
@@ -70,7 +90,7 @@ class SignUpLayout extends HookWidget {
                 Spacings.spacer40,
                 GradientButton(
                   text: context.s.sign_up,
-                  onPressed: validateAll,
+                  onPressed: () => validateAll(context),
                 ),
               ],
             ),
