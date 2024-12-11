@@ -41,8 +41,6 @@ dependencies:
   go_router: ^13.2.0
   # https://pub.dev/packages/logger
   logger: ^2.4.0
-  # https://pub.dev/packages/hooks_riverpod
-  hooks_riverpod: ^2.5.1
   # https://pub.dev/packages/flutter_bloc
   flutter_bloc: ^8.1.6
   # https://pub.dev/packages/dio

@@ -1,3 +1,6 @@
+import 'package:clario/core/theme/palette.dart';
+import 'package:clario/core/theme/text_styles.dart';
+import 'package:clario/presentation/widgets/tokens/spacings.dart';
 import 'package:flutter/material.dart';
 
 enum FieldState {
@@ -28,48 +31,65 @@ class InputFieldWidget extends StatelessWidget {
   final Widget? prefixIcon;
   final TextEditingController? controller;
 
+  static const _filled = true;
+  static const _fieldHeight = 48.0;
+  static const _defaultBorder = 1.0;
+  static const _cursorHeight = 17.0;
+  static const _cursorWidth = 2.0;
+  static const _contentPadding = EdgeInsets.symmetric(vertical: 12, horizontal: 20);
+
   @override
   Widget build(BuildContext context) {
     final isError = fieldState == FieldState.error;
-    final isSuccess = fieldState == FieldState.success;
+
+    final stateColor = switch (fieldState) {
+      FieldState.error => Palette.errorColor,
+      FieldState.success => Palette.lightGreen,
+      FieldState.initial => Palette.lightBlack,
+    };
+
+    final enabledBorderColor = switch (fieldState) {
+      FieldState.error => Palette.errorColor,
+      FieldState.success => Palette.lightGreen,
+      FieldState.initial => Colors.transparent,
+    };
+
+    final focusBorderColor = switch (fieldState) {
+      FieldState.error => Palette.errorColor,
+      FieldState.success => Palette.lightGreen,
+      FieldState.initial => Palette.initBorderColor,
+    };
+
+    final hintColor = isError ? Palette.errorColor : Palette.initBorderColor;
+    final fillColor = isError ? Palette.pinkColor : Colors.white;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextFormField(
-          controller: controller,
-          focusNode: node,
-          cursorColor: isError ? Colors.red : (isSuccess ? Colors.green : Colors.grey),
-          style: TextStyle(
-            color: isError ? Colors.red : (isSuccess ? Colors.green : Colors.black),
-            fontWeight: FontWeight.w400,
-          ),
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.w400,
-              color: isError ? Colors.red : Colors.grey,
-            ),
-            filled: true,
-            fillColor: isError
-                ? Colors.red.withOpacity(0.1)
-                : (isSuccess ? Colors.green.withOpacity(0.1) : Colors.white),
-            suffixIcon: suffixIcon,
-            prefixIcon: prefixIcon,
-            contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide(
-                color: isError ? Colors.red : (isSuccess ? Colors.green : Colors.grey),
-                width: 1.0,
+        SizedBox(
+          height: _fieldHeight,
+          child: TextFormField(
+            cursorHeight: _cursorHeight,
+            cursorWidth: _cursorWidth,
+            focusNode: node,
+            controller: controller,
+            cursorColor: stateColor,
+            style: TextStyles.inputTextStyle.copyWith(color: stateColor),
+            decoration: InputDecoration(
+              hintText: hintText,
+              hintStyle: TextStyles.inputTextStyle.copyWith(color: hintColor),
+              filled: _filled,
+              fillColor: fillColor,
+              suffixIcon: suffixIcon,
+              prefixIcon: prefixIcon,
+              contentPadding: _contentPadding,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: Spacings.borderRadius10,
+                borderSide: BorderSide(color: enabledBorderColor),
               ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: BorderSide(
-                color: isError ? Colors.red : (isSuccess ? Colors.green : Colors.black),
-                width: 2.0,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: Spacings.borderRadius10,
+                borderSide: BorderSide(color: focusBorderColor, width: _defaultBorder),
               ),
             ),
           ),

@@ -10,9 +10,9 @@ abstract class TextStyles {
         fontWeight: FontWeight.w700,
       );
 
-  static TextStyle get hintTextStyle => const TextStyle(
+  static TextStyle get inputTextStyle => const TextStyle(
+        color: Palette.lightBlack,
         fontSize: 16,
-        color: Palette.lightGreen,
         fontFamily: FontFamily.inter,
         fontWeight: FontWeight.w400,
       );

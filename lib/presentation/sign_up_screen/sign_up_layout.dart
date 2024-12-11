@@ -1,50 +1,52 @@
+import 'package:clario/core/templates/context_extensions.dart';
+import 'package:clario/gen/assets.gen.dart';
+import 'package:clario/presentation/widgets/atoms/background_widget.dart';
+import 'package:clario/presentation/widgets/atoms/gradient_button.dart';
+import 'package:clario/presentation/widgets/tokens/spacings.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:clario/presentation/widgets/moleculs/input_field_widget.dart';
 import 'package:clario/presentation/widgets/tokens/form_validators.dart';
-import 'package:flutter/material.dart';
 
-class SignUpLayout extends StatefulWidget {
+class SignUpLayout extends HookWidget {
   const SignUpLayout({super.key});
 
   @override
-  State<SignUpLayout> createState() => _SignUpLayoutState();
-}
-
-class _SignUpLayoutState extends State<SignUpLayout> {
-  final TextEditingController _emailController = TextEditingController();
-  final FocusNode _emailFocusNode = FocusNode();
-  FieldState _emailFieldState = FieldState.initial;
-  String? _emailErrorMessage;
-
-  void _validateEmail() {
-    final result = FormValidators.emailValidator(context, _emailController.text);
-    setState(() {
-      _emailFieldState = result.state;
-      _emailErrorMessage = result.errorMessage;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final emailController = useTextEditingController();
+    final emailFocusNode = useFocusNode();
+    final emailErrorMessage = useState<String?>(null);
+    final emailFieldState = useState<FieldState>(FieldState.initial);
+
+    void validateEmail() {
+      final result = FormValidators.emailValidator(context, emailController.text);
+      emailFieldState.value = result.state;
+      emailErrorMessage.value = result.errorMessage;
+    }
+
     return Scaffold(
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InputFieldWidget(
-                hintText: 'Email',
-                controller: _emailController,
-                node: _emailFocusNode,
-                fieldState: _emailFieldState,
-                errorMessage: _emailErrorMessage,
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _validateEmail,
-                child: const Text('Sign Up'),
-              ),
-            ],
+        child: BackgroundWidget(
+          backgroundAsset: Assets.images.png.background.path,
+          child: Padding(
+            padding: Spacings.paddingH30,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InputFieldWidget(
+                  hintText: 'Email',
+                  node: emailFocusNode,
+                  controller: emailController,
+                  fieldState: emailFieldState.value,
+                  errorMessage: emailErrorMessage.value,
+                ),
+                Spacings.spacer40,
+                GradientButton(
+                  text: context.s.sign_up,
+                  onPressed: validateEmail,
+                ),
+              ],
+            ),
           ),
         ),
       ),

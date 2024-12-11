@@ -10,7 +10,7 @@ class Spacings {
   static const xL = 20.0;
   static const xxL = 24.0;
   static const xxxL = 30.0;
-  static const xxxxL = 48.0;
+  static const xxxxL = 40.0;
   static const xxxxxL = 56.0;
   static const xxxxxxL = 64.0;
 
@@ -33,7 +33,7 @@ class Spacings {
 
   static const spacer30 = SizedBox.square(dimension: xxxL);
 
-  static const spacer48 = SizedBox.square(dimension: xxxxL);
+  static const spacer40 = SizedBox.square(dimension: xxxxL);
 
   static const spacer56 = SizedBox.square(dimension: xxxxxL);
 
@@ -101,5 +101,5 @@ class Spacings {
 
   static const paddingV30 = EdgeInsets.symmetric(vertical: xxxL);
 
-  static const paddingV48 = EdgeInsets.symmetric(vertical: xxxxL);
+  static const paddingV40 = EdgeInsets.symmetric(vertical: xxxxL);
 }
