@@ -13,15 +13,34 @@ class SignUpLayout extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Controllers and focus nodes
     final emailController = useTextEditingController();
+    final passController = useTextEditingController();
     final emailFocusNode = useFocusNode();
+    final passFocusNode = useFocusNode();
+
+    // State management for field validation
     final emailErrorMessage = useState<String?>(null);
     final emailFieldState = useState<FieldState>(FieldState.initial);
+    final passErrorMessage = useState<String?>(null);
+    final passFieldState = useState<FieldState>(FieldState.initial);
 
+    // Validation functions
     void validateEmail() {
       final result = FormValidators.emailValidator(context, emailController.text);
       emailFieldState.value = result.state;
       emailErrorMessage.value = result.errorMessage;
+    }
+
+    void validatePassword() {
+      final result = FormValidators.passwordValidator(context, passController.text);
+      passFieldState.value = result.state;
+      passErrorMessage.value = result.errorMessage;
+    }
+
+    void validateAll() {
+      validateEmail();
+      validatePassword();
     }
 
     return Scaffold(
@@ -33,17 +52,25 @@ class SignUpLayout extends HookWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                InputFieldWidget(
+                InputFieldWidget.email(
                   hintText: 'Email',
                   node: emailFocusNode,
                   controller: emailController,
                   fieldState: emailFieldState.value,
                   errorMessage: emailErrorMessage.value,
                 ),
+                Spacings.spacer20,
+                InputFieldWidget.password(
+                  hintText: 'Create your password',
+                  node: passFocusNode,
+                  controller: passController,
+                  fieldState: passFieldState.value,
+                  errorMessage: passErrorMessage.value,
+                ),
                 Spacings.spacer40,
                 GradientButton(
                   text: context.s.sign_up,
-                  onPressed: validateEmail,
+                  onPressed: validateAll,
                 ),
               ],
             ),

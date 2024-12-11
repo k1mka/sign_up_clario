@@ -14,6 +14,9 @@ class $AssetsImagesGen {
 
   /// Directory path: assets/images/png
   $AssetsImagesPngGen get png => const $AssetsImagesPngGen();
+
+  /// Directory path: assets/images/svg
+  $AssetsImagesSvgGen get svg => const $AssetsImagesSvgGen();
 }
 
 class $AssetsImagesPngGen {
@@ -25,6 +28,19 @@ class $AssetsImagesPngGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [background];
+}
+
+class $AssetsImagesSvgGen {
+  const $AssetsImagesSvgGen();
+
+  /// File path: assets/images/svg/hide_password.svg
+  String get hidePassword => 'assets/images/svg/hide_password.svg';
+
+  /// File path: assets/images/svg/show_password.svg
+  String get showPassword => 'assets/images/svg/show_password.svg';
+
+  /// List of all assets
+  List<String> get values => [hidePassword, showPassword];
 }
 
 class Assets {
